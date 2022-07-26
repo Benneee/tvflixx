@@ -10,7 +10,12 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'App',
-  components: {}
+  components: {},
+
+  // setup() {
+  //   const baseURL = process.env.VUE_APP_API_BASE_URL;
+  // }
+
 });
 </script>
 
