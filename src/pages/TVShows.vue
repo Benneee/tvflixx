@@ -1,14 +1,13 @@
 <template>
     <div>
-        <p>Favorites</p>
+        <p>Shows here</p>
     </div>
 </template>
-
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: "Favorites"
+    name: 'TVShows'
 })
 </script>
