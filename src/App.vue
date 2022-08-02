@@ -1,6 +1,6 @@
 <template>
   <notifications />
-  <TheHeader v-if="$route?.path !== '/home'" />
+  <TheHeader v-if="$route?.path !== '/shows'" />
   <router-view v-slot="slotProps">
     <transition name="route" mode="out-in">
       <component :is="slotProps?.Component"></component>
@@ -10,7 +10,8 @@
 
 <script lang="ts">
 import TheHeader from './components/TheHeader.vue';
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'App',
@@ -19,11 +20,13 @@ export default defineComponent({
   },
 
   setup() {
-    const baseURL = process.env.VUE_APP_API_BASE_URL;
+    const router = useRouter();
 
-    return {
-      baseURL
-    }
+    onMounted(() => {
+      if (router) {
+        // console.log("router: ", router);
+      }
+    })
   }
 
 });
