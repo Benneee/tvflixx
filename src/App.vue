@@ -1,6 +1,6 @@
 <template>
   <notifications />
-  <TheHeader v-if="$route?.path !== '/shows'" />
+  <TheHeader v-if="['/shows', '/favorites'].includes($route?.path)" />
   <router-view v-slot="slotProps">
     <transition name="route" mode="out-in">
       <component :is="slotProps?.Component"></component>
