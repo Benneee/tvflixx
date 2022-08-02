@@ -31,12 +31,12 @@ export default defineComponent({
         })
 
         onUnmounted(() => {
-          observer?.value?.disconnect();
+            observer?.value?.disconnect();
         })
 
         return {
-          root,
-          observer
+            root,
+            observer
         }
     },
 })

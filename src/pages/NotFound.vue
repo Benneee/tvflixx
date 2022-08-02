@@ -3,7 +3,7 @@
         <p>Error</p>
 
         <h1>What You Seek Is Unavailable!</h1>
-        <h4><span>&larr;</span> Go Home</h4>
+        <h4><span>&larr;</span>Let's take you home</h4>
     </div>
 </template>
 
@@ -13,6 +13,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

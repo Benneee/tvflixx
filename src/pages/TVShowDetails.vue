@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>Favorites</p>
+        <p>Show Details</p>
     </div>
 </template>
 
@@ -9,6 +9,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: "Favorites"
+    name: "ShowDetails",
 })
 </script>

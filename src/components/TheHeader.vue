@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>TVFlixx</h1>
+        <h1 class="heading">TVFlixx</h1>
     </div>
 </template>
 
@@ -13,6 +13,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="sass">
-
+<style lang="scss">
+    .heading {
+        font-size: 2rem;
+    }
 </style>
