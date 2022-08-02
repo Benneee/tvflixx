@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-
+import NotFound from "./pages/NotFound.vue"
 
 const router = createRouter({
     history: createWebHistory(),
@@ -25,7 +25,8 @@ const router = createRouter({
         },
         { 
             path: '/:notFound(.*)*', 
-            component: () => import('./pages/NotFound.vue')
+            name: "not-found",
+            component: NotFound
         }
     ],
 
