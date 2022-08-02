@@ -3,6 +3,20 @@
 @import url('https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+@font-face {
+    font-family: Nintendo;
+    font-style: normal;
+    src: local('Nintendo'),
+        url("~@/assets/fonts/nintendo-nes-font.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: HackedFont;
+    font-style: normal;
+    src: local('HackedFont'),
+        url("~@/assets/fonts/Hacked-KerX.ttf") format("truetype");
+}
+
 @import 'abstracts/mixins';
 @import 'abstracts/variables';
 

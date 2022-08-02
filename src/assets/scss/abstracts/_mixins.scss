@@ -1,3 +1,22 @@
+@mixin grid-flex {
+  font-family: $primary-font;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1.4rem;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+  width: 100%;
+  align-items: center;
+  margin: 1.5rem auto;
+  max-width: 1200px;
+
+  @include respond(tab-port) {
+    padding: 1rem 0.8rem;
+    justify-content: center;
+    gap: 0.9rem;
+  }
+}
+
 /*
 $breakpoint argument choices:
 - phone

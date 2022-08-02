@@ -1,7 +1,11 @@
 <template>
-    <div>
-        <h1 class="heading">TVFlixx</h1>
-    </div>
+    <header class="nav__container">
+        <div class="header">
+            <div class="header__logo">
+                <h1 class="heading">TVFlixx</h1>
+            </div>
+        </div>
+    </header>
 </template>
 
 <script lang="ts">
@@ -13,7 +17,11 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+    .nav__container {
+        @include grid-flex;
+    }
+
     .heading {
         font-size: 2rem;
     }
