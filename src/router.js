@@ -9,12 +9,12 @@ const router = createRouter({
             redirect: 'shows'
         },
         {
-            path: 'shows',
+            path: '/shows',
             name: 'shows',
             component: () => import('./pages/Shows.vue')
         },
         {
-            path: 'favorites',
+            path: '/favorites',
             name: 'favorites',
             component: () => import('./pages/Favorites.vue')
         },
@@ -24,7 +24,7 @@ const router = createRouter({
             component: () => import('./pages/ShowDetails.vue')
         },
         { 
-            path: '/:notFound(.*)', 
+            path: '/:notFound(.*)*', 
             component: () => import('./pages/NotFound.vue')
         }
     ],
