@@ -59,5 +59,6 @@ export default defineComponent({
 <style lang="scss" scoped>
     .tv-shows {
         @include grid-flex;
+        margin-top: 6.5rem;
     }
 </style>

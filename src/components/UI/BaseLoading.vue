@@ -24,7 +24,7 @@ export default defineComponent({
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 60vh;
+      min-height: 80vh;
 
       &__text {
           font-family: $secondary-font;
