@@ -162,7 +162,7 @@ export default defineComponent({
                 align-items: center;
 
                 a {
-                    color: rgb(24, 185, 24);;
+                    color: $custom-green;
                 }
 
                 button {
@@ -172,7 +172,7 @@ export default defineComponent({
                     border-radius: 20px;
                     color: #fff;
                     border: none;
-                    background-color: rgb(24, 185, 24);
+                    background-color: $custom-green;
                     cursor: pointer;
                 }
             }
