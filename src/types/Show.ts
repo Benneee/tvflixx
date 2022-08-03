@@ -1,20 +1,13 @@
-import Episode from "./Episode";
-
 interface Show {
-    id: number,
-    name: string,
-    permalink: string,
-    url: string,
-    description: string,
     country: string,
-    status: string,
-    network: string,
-    image_path: string,
-    image_thumbnail_path: string,
-    rating: string,
-    genres: string[],
-    pictures: string[],
-    episodes: Episode[],
+    end_date: string | null,
+    id: number,
+    image_thumbnail_path: string | null,
+    name: string,
+    network: string | null,
+    permalink: string | null,
+    start_date: string | null,
+    status: string | null
 }
 
 export default Show;

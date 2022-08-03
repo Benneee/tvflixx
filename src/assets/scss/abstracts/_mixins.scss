@@ -2,11 +2,14 @@
   font-family: $primary-font;
   display: flex;
   flex-flow: row wrap;
-  gap: 1.4rem;
-  justify-content: space-between;
+  // gap: 1.4rem;
+  // justify-content: space-between;
   padding: 1rem 3rem;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-box-align: stretch;
   width: 100%;
-  align-items: center;
+  align-items: stretch;
   margin: 1.5rem auto;
   max-width: 1200px;
 
