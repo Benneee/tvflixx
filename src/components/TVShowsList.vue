@@ -1,0 +1,41 @@
+<template>
+    <article class="tv-show" v-for="( show, index ) in tvShows" :key="show.id">
+        <TVShow
+            :tvShow="show"
+            :showIndex="index"
+        />
+    </article>
+</template>
+
+<script lang="ts">
+import TVShow from '@/components/TVShow.vue';
+import Show from '@/types/Show';
+import { defineComponent, PropType } from 'vue';
+
+export default defineComponent({
+    name: "TVShowsList",
+    
+    props: {
+        tvShows: {
+            type: Array as PropType<Show[]>,
+            required: true
+        }
+    },
+
+    components: {
+        TVShow
+    }
+})
+</script>
+
+<style lang="scss" scoped>
+    .tv-show {
+        height: 25rem;
+        width: 18.2%;
+        margin: 1.5rem 0.8%;
+        padding: 0;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, .075),0 2px 10px rgba(0, 0, 0, .15);            
+        background: #fff;
+        transition: .3s;
+    }
+</style>
