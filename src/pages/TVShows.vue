@@ -26,11 +26,15 @@
                         <div class="show-actions">
                             <a class="pointer"> <i class="mdi mdi-eye"></i> See details</a>
                             
-                            <i class="mdi mdi-heart-outline pointer tooltip">
+                            <!-- <i class="mdi mdi-heart-outline pointer tooltip">
                                 <span class="tooltip__text">
                                     Add as favorite
                                 </span>
-                            </i>
+                            </i> -->
+                            <button>
+                                Add as Favorite 
+                                <i class="mdi mdi-heart-outline"></i>
+                            </button>
                         </div>
 
                     </div>
@@ -194,20 +198,33 @@ export default defineComponent({
             }
 
             .show-actions {
-                margin-top: 1rem;
+                margin-top: 2rem;
                 width: 100%;
                 display: flex;
-                justify-content: space-between;
+                // justify-content: space-between;
+                justify-content: center;
+                flex-direction: column;
                 align-items: center;
 
                 a {
-                    color: lightgreen;
+                    color: rgb(24, 185, 24);;
+                }
+
+                button {
+                    margin-top: 1rem;
+                    box-shadow: none;
+                    padding: 0.75rem;
+                    border-radius: 20px;
+                    color: #fff;
+                    border: none;
+                    background-color: rgb(24, 185, 24);
+                    cursor: pointer;
                 }
                 
-                i.mdi-heart-outline {
-                    font-size: 1.5rem;
-                    color: lightgreen;
-                }
+                // i.mdi-heart-outline {
+                //     font-size: 1.5rem;
+                //     color: lightgreen;
+                // }
             }
         }
     }
