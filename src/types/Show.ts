@@ -6,7 +6,7 @@ interface Show {
     name: string,
     network: string | null,
     permalink: string | null,
-    start_date: string | null,
+    start_date: string,
     status: string | null
 }
 

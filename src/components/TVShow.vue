@@ -10,7 +10,10 @@
         </div>
         <div class="tv-show__properties-description">
             <ul class="show-info">
-                <li><span class="show-info__heading">Start Date</span> {{ tvShow?.start_date }} </li>
+                <li>
+                    <span class="show-info__heading">Start Date</span>
+                    {{ getFormattedDate(tvShow.start_date) }} 
+                </li>
                 <li>
                     <span class="show-info__heading">Station</span> 
                     {{ tvShow?.network }}({{ tvShow?.country }}) 
@@ -38,6 +41,7 @@
 <script lang="ts">
 import Show from '@/types/Show';
 import { defineComponent, PropType, ref } from 'vue'
+import { formatDate } from "@/helpers";
 
 export default defineComponent({
     name: "TVShow",
@@ -64,10 +68,15 @@ export default defineComponent({
             return selectedShow.value === showIndex
         }
 
+        function getFormattedDate(date: string) {
+            return formatDate(date);
+        }
+
         return {
             hoverCard,
             selectedShow,
-            isSelected
+            isSelected,
+            getFormattedDate
         }
     }
 })
