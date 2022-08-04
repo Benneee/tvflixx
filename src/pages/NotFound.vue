@@ -59,6 +59,10 @@ export default defineComponent({
                 overflow: hidden;
                 animation: load 6s linear infinite;
             }
+
+            @include respond(phone) {
+                font-size: 12rem;
+            }
         }
         
         &__info {
@@ -70,6 +74,10 @@ export default defineComponent({
                 font-weight: 600;
                 font-family: $tertiary-font;
                 margin-bottom: 1rem;
+
+                @include respond(phone) {
+                    font-size: 1rem;
+                }
             }
 
             small {

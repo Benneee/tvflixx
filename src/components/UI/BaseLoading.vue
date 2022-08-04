@@ -3,9 +3,6 @@
       <h1 data-text="Loading..." class="loading__text">
         Loading...
       </h1>
-      <!-- <div class="loading__subtext">
-        <p>Please wait</p>
-      </div> -->
     </div>
 </template>
 
@@ -25,6 +22,10 @@ export default defineComponent({
       align-items: center;
       justify-content: center;
       min-height: 80vh;
+
+        @include respond(phone) {
+          min-height: 90vh;
+        }
 
       &__text {
           font-family: $secondary-font;
@@ -46,6 +47,11 @@ export default defineComponent({
               overflow: hidden;
               animation: load 6s linear infinite;
           }
+
+        @include respond(phone) {
+          font-size: 3rem;
+        }
+
       }
 
       &__subtext {

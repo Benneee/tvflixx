@@ -60,5 +60,9 @@ export default defineComponent({
     .tv-shows {
         @include grid-flex;
         margin-top: 6.5rem;
+
+        @include respond(phone) {
+            margin-top: 4rem;
+        }
     }
 </style>
