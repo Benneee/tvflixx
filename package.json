@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@kyvg/vue3-notification": "^2.3.4",
+    "axios": "^0.27.2",
     "core-js": "^3.6.5",
     "moment": "^2.29.4",
     "node-sass": "^7.0.1",
