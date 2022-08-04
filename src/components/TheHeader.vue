@@ -59,11 +59,19 @@ export default defineComponent({
                 a:hover {
                     color: $custom-green;
                 }
+
+                @include respond(phone) {
+                    padding: 0 1rem;
+                }
+
             }
         }
 
         .heading {
             font-size: 2rem;
+            @include respond(phone) {
+                font-size: 1.3rem;
+            }
 
             &:hover {
                 color: $custom-green;;

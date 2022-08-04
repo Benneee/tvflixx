@@ -31,11 +31,19 @@ export default defineComponent({
 <style lang="scss" scoped>
     .tv-show {
         height: 25rem;
-        width: 18.2%;
+        width: 16rem;
         margin: 1.5rem 0.8%;
         padding: 0;
         box-shadow: 0 2px 3px rgba(0, 0, 0, .075),0 2px 10px rgba(0, 0, 0, .15);            
         background: #fff;
         transition: .3s;
+
+        @include respond(phone) {
+            width: 100%;
+        }
+
+        @include respond(tab-port) {
+            width: 18rem;
+        }
     }
 </style>
