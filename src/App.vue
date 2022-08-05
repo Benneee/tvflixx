@@ -1,6 +1,6 @@
 <template>
   <notifications position="top right"/>
-  <TheHeader v-if="['/shows', '/favorites'].includes($route?.path)" />
+  <TheHeader v-if="['/shows', '/shows/', '/favorites'].includes($route?.path)" />
   <router-view v-slot="slotProps">
     <transition name="route" mode="out-in">
       <component :is="slotProps?.Component"></component>
@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import TheHeader from './components/TheHeader.vue';
+import TheHeader from '@/components/TheHeader.vue';
 import { defineComponent, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
