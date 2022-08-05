@@ -25,7 +25,6 @@ export default defineComponent({
             // Add notification thingy here
         }
 
-
         onMounted(() => {
             getFavorites();
         })

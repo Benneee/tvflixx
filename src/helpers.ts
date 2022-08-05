@@ -23,7 +23,7 @@ export function addToFavorites(tvShow: Show): void {
     if (savedFavorites.length > 0) {
         const newFavorites: Show[] = [tvShow, ...savedFavorites];
         const noDuplicates: Show[] = newFavorites.filter(
-            (v, i, a) => a.findIndex((pokemon) => pokemon.id === v.id) === i,
+            (v, i, a) => a.findIndex((show) => show.id === v.id) === i,
         );
         localStorage.removeItem("tvShows");
         localStorage.setItem(
