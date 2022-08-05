@@ -21,7 +21,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/shows/:showId',
         name: 'show-details',
-        component: () => import('../pages/TVShowDetails.vue')
+        component: () => import('../pages/TVShowDetails.vue'),
     },
     { 
         path: '/:notFound(.*)', 

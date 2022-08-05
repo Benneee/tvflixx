@@ -20,6 +20,21 @@
   }
 }
 
+@mixin fave-btn {
+  margin-top: 1rem;
+  box-shadow: none;
+  padding: 0.75rem;
+  border-radius: 20px;
+  color: #fff;
+  border: none;
+  background-color: $custom-green;
+  cursor: pointer;
+
+  &.not-favorite {
+      background-color: $red;
+  }
+}
+
 // Order for markup is section > h1 > p > p
 @mixin info-block {
   margin-top: 6.5rem;
@@ -45,6 +60,10 @@
 
   p:first-of-type {
       margin-bottom: 1rem;
+  }
+
+  button {
+    @include fave-btn;
   }
 }
 

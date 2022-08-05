@@ -22,7 +22,7 @@
             </ul>
 
             <div class="show-actions">
-                <a class="pointer"> <i class="mdi mdi-eye"></i> See details</a>
+                <a class="pointer" @click="goToDetails(tvShow)"> <i class="mdi mdi-eye"></i> See details</a>
                 <button v-if="!isFavorite(tvShow.id)" @click="addShowToFavorites(tvShow)">
                     Add as Favorite 
                     <i class="mdi mdi-heart-outline"></i>
@@ -48,6 +48,7 @@ import { defineComponent, PropType, ref } from 'vue'
 
 import Show from '@/types/Show';
 import { formatDate, addToFavorites, removeFromFavorites, isShowAFavorite } from "@/helpers";
+import { useRouter } from "vue-router";
 
 
 export default defineComponent({
@@ -67,6 +68,7 @@ export default defineComponent({
     },
 
     setup(_, { emit }) {
+        const router = useRouter();
         let selectedShow = ref(-1);
 
         function hoverCard(selectedShowIndex: number) {
@@ -100,6 +102,15 @@ export default defineComponent({
             emit("refresh-list");
         }
 
+        function goToDetails(tvShow: Show): void {
+            router.push({
+                name: "show-details",
+                params: {
+                    "showId": tvShow.id         
+                }
+            })
+        }
+
         return {
             hoverCard,
             selectedShow,
@@ -108,6 +119,7 @@ export default defineComponent({
             isFavorite,
             addShowToFavorites,
             removeShowFromFavorites,
+            goToDetails,
         }
     }
 })
@@ -203,21 +215,14 @@ export default defineComponent({
 
                 a {
                     color: $custom-green;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
 
                 button {
-                    margin-top: 1rem;
-                    box-shadow: none;
-                    padding: 0.75rem;
-                    border-radius: 20px;
-                    color: #fff;
-                    border: none;
-                    background-color: $custom-green;
-                    cursor: pointer;
-
-                    &.not-favorite {
-                        background-color: $red;
-                    }
+                    @include fave-btn;
                 }
             }
         }
