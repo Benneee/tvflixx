@@ -1,5 +1,5 @@
 <template>
-  <notifications />
+  <notifications position="top right"/>
   <TheHeader v-if="['/shows', '/favorites'].includes($route?.path)" />
   <router-view v-slot="slotProps">
     <transition name="route" mode="out-in">

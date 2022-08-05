@@ -1,5 +1,9 @@
 import moment from "moment";
+import { notify } from "@kyvg/vue3-notification";
+
 import Show from "@/types/Show";
+
+
 
 export const apiURL = "https://www.episodate.com/api";
 
@@ -14,6 +18,11 @@ export function formatDateTime(date: string): string {
 export function fetchFavorites(): Show[] {
     const shows: Show[] = localStorage && JSON.parse(localStorage.getItem("tvShows") || "[]");
     return shows;
+}
+
+export function isShowAFavorite(showId: number): boolean {
+    const shows: Show[] = fetchFavorites();
+    return shows.findIndex((show: Show) => show.id === showId) !== -1;
 }
 
 export function addToFavorites(tvShow: Show): void {
@@ -37,6 +46,11 @@ export function addToFavorites(tvShow: Show): void {
             JSON.stringify(favoriteShows)
         )
     }
+
+    notify({
+        title: "Favorites",
+        text: `${tvShow.name} has been added to your favorite TV shows`
+    })
 }
 
 export function removeFromFavorites(showId: number): void {
