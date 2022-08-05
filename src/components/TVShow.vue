@@ -23,9 +23,13 @@
 
             <div class="show-actions">
                 <a class="pointer"> <i class="mdi mdi-eye"></i> See details</a>
-                <button>
+                <button v-if="!isFavorite(tvShow.id)" @click="addShowToFavorites(tvShow)">
                     Add as Favorite 
                     <i class="mdi mdi-heart-outline"></i>
+                </button>
+                <button class="not-favorite" v-else @click="removeShowFromFavorites(tvShow)">
+                    Remove from Favorites 
+                    <i class="mdi mdi-heart"></i>
                 </button>
             </div>
 
@@ -39,12 +43,17 @@
 
 
 <script lang="ts">
-import Show from '@/types/Show';
+import { notify } from "@kyvg/vue3-notification";
 import { defineComponent, PropType, ref } from 'vue'
-import { formatDate } from "@/helpers";
+
+import Show from '@/types/Show';
+import { formatDate, addToFavorites, removeFromFavorites, isShowAFavorite } from "@/helpers";
+
 
 export default defineComponent({
     name: "TVShow",
+
+    emits: ["refresh-list"],
     
     props: {
         tvShow: {
@@ -57,7 +66,7 @@ export default defineComponent({
         }
     },
 
-    setup() {
+    setup(_, { emit }) {
         let selectedShow = ref(-1);
 
         function hoverCard(selectedShowIndex: number) {
@@ -72,11 +81,33 @@ export default defineComponent({
             return formatDate(date);
         }
 
+        function isFavorite(showId: number): boolean {
+            return isShowAFavorite(showId)
+        }
+
+        function addShowToFavorites(tvShow: Show): void {
+            addToFavorites(tvShow)
+        }
+
+        function removeShowFromFavorites(tvShow: Show): void {
+            removeFromFavorites(tvShow.id);
+            notify({
+                title: "Favorites",
+                text: `${tvShow.name} has been removed from your favorite TV shows`
+            });
+
+            // Refresh the list
+            emit("refresh-list");
+        }
+
         return {
             hoverCard,
             selectedShow,
             isSelected,
-            getFormattedDate
+            getFormattedDate,
+            isFavorite,
+            addShowToFavorites,
+            removeShowFromFavorites,
         }
     }
 })
@@ -183,6 +214,10 @@ export default defineComponent({
                     border: none;
                     background-color: $custom-green;
                     cursor: pointer;
+
+                    &.not-favorite {
+                        background-color: $red;
+                    }
                 }
             }
         }

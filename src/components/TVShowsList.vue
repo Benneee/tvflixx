@@ -3,6 +3,7 @@
         <TVShow
             :tvShow="show"
             :showIndex="index"
+            @refresh-list="refreshList"
         />
     </article>
 </template>
@@ -14,6 +15,8 @@ import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
     name: "TVShowsList",
+
+    emits: ["refresh-shows-list"],
     
     props: {
         tvShows: {
@@ -24,6 +27,16 @@ export default defineComponent({
 
     components: {
         TVShow
+    },
+
+    setup(_, { emit }) {
+        function refreshList(): void {
+            emit("refresh-shows-list")
+        }
+
+        return {
+            refreshList,
+        }
     }
 })
 </script>
