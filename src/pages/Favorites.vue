@@ -13,7 +13,9 @@
             <section class="tv-error">
                 <h1>No Favorites!</h1>
                 <p>Looks like you do not currently have any favorite TV shows.</p>
-                <p>Please <router-link to="/">go home</router-link> and like some.</p>
+                <div class="center">
+                    <button @click="goHome">Explore TV Shows</button>
+                </div>
             </section>
         </div>
     </div>
@@ -21,7 +23,9 @@
 
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+
 import Show from '@/types/Show';
 import { fetchFavorites } from '@/helpers';
 import TVShowsList from "@/components/TVShowsList.vue";
@@ -38,6 +42,13 @@ export default defineComponent({
     setup() {
         const isLoading = ref(false);
         const favorites = ref<Show[]>([]);
+        const router = useRouter();
+
+        function goHome() {
+            router.push({
+                name: 'shows'
+            })
+        }
 
         function getFavorites() {
             isLoading.value = true;
@@ -58,6 +69,7 @@ export default defineComponent({
             favorites,
             isLoading,
             refreshFavorites,
+            goHome,
         }
     }
 })
@@ -78,6 +90,10 @@ export default defineComponent({
         a {
             text-decoration: underline;
             color: $custom-green;
+        }
+
+        .center {
+            text-align: center;
         }
     }
 </style>
