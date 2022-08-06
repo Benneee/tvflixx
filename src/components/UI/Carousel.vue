@@ -11,8 +11,13 @@
             </button>
         </div>
         <div v-if="tvShowPictures" class="tv-show-pictures">
-            <section v-for="(picture, index) in tvShowPictures" :key="`pic-${index}`">
-                <img :src="picture" :alt="`Picture number ${index + 1}`">
+            <section 
+                v-for="(picture, index) in tvShowPictures" 
+                :key="`pic-${index}`" 
+                :class="{ 'active-slide': activeSlide === index }"
+                :ref="`currentImg-${index}`"
+            >
+                <img @click="showThisPicture(index)" :src="picture" :alt="`Picture number ${index + 1}`">
             </section>
         </div>
     </div>
@@ -28,12 +33,22 @@ export default defineComponent({
         tvShowPictures: {
             type: Array,
             required: true
+        },
+        activeSlide: {
+            type: Number,
+            required: false,
         }
     },
 
-    emits: ["next", "previous"],
+    emits: ["next", "previous", "selectedFromReels"],
 
     setup(_, { emit }) {
+        // const currentImg = ref()
+
+        // const setFocus = computed(() => {
+        //     return ''
+        // })
+
         function next() {
             emit("next")
         }
@@ -42,9 +57,15 @@ export default defineComponent({
             emit("previous")
         }
 
+        function showThisPicture(indexOfPicture: number) {
+            emit("selectedFromReels", indexOfPicture);
+        }
+
         return {
             next,
-            previous
+            previous,
+            showThisPicture,
+            // setFocus,
         }
     }
 })
@@ -95,18 +116,26 @@ export default defineComponent({
             
         .tv-show-pictures {
             display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
             margin-top: 8px;
+            width: 300px;
             
             section {
                 padding: 2px;
                 height: 72px;
                 width: 72px;
+                flex: 0 0 auto;
+                cursor: pointer;
 
                 img {
                     width: 100%;
                     height: 100%;
                 }
 
+                &.active-slide {
+                    border: 1px solid $custom-green;
+                }
             }
         }
     }

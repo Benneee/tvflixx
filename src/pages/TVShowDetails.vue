@@ -10,6 +10,8 @@
                     :tvShowPictures="showDetails?.pictures"
                     @next="showNextSlide"
                     @previous="showPreviousSlide"
+                    @selectedFromReels="showThisPicture"
+                    :activeSlide="activeSlide"
                 >
                     <carousel-item 
                         v-for="(picture, index) in showDetails?.pictures" 
@@ -104,6 +106,10 @@ export default defineComponent({
             }
         }
 
+        function showThisPicture(indexOfPicture: number) {
+            activeSlide.value = indexOfPicture;
+        }
+
 
         onMounted(() => {
             fetchShowDetails();
@@ -116,6 +122,7 @@ export default defineComponent({
             activeSlide,
             showNextSlide,
             showPreviousSlide,
+            showThisPicture,
         }
     }
 })
