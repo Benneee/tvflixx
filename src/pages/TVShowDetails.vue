@@ -1,9 +1,13 @@
 <template>
     <TheHeader />
-    <div class="details">
+
+    <Loading v-if="isLoading" />
+
+    <div class="details" v-if="!isLoading && !errorOccurred">
         <div class="details__info">
             <section class="details__info-pictures">
                 <carousel
+                    :tvShowPictures="showDetails?.pictures"
                     @next="showNextSlide"
                     @previous="showPreviousSlide"
                 >
@@ -26,6 +30,14 @@
             <p>Episodes will show here</p>
         </div>
     </div>
+            
+    <div v-if="!isLoading && errorOccurred">
+        <section class="tv-error">
+            <h1>Something went wrong!</h1>
+            <p>But don't worry - it can happen to the best of us, and it just happened to you.</p>
+            <p>Please try again later.</p>
+        </section>
+    </div>
 </template>
 
 
@@ -39,6 +51,7 @@ import ShowDetail from '@/types/ShowDetail';
 import Carousel from "@/components/UI/Carousel.vue"
 import CarouselItem from "@/components/UI/CarouselItem.vue"
 import TheHeader from '@/components/TheHeader.vue';
+import Loading from "@/components/UI/BaseLoading.vue";
 
 export default defineComponent({
     name: "ShowDetails",
@@ -47,6 +60,7 @@ export default defineComponent({
         Carousel,
         CarouselItem,
         TheHeader,
+        Loading
     },
 
     setup() {
@@ -68,7 +82,6 @@ export default defineComponent({
                 showDetails.value = tvShow;
                 picturesCount.value = tvShow.pictures.length;
                 isLoading.value = false;
-                console.log("TV Show: ", tvShow);
             } catch (error) {
                 isLoading.value = false;
                 errorOccurred.value = !!error;
@@ -85,7 +98,6 @@ export default defineComponent({
 
         function showPreviousSlide() {
             if (activeSlide.value <= 0) {
-                console.log("pictures: ", picturesCount.value);
                 activeSlide.value = picturesCount.value - 1;
             } else {
                 activeSlide.value--
