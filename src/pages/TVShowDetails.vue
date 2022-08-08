@@ -23,8 +23,25 @@
                     </carousel-item>
                 </carousel>
             </section>
-            <section class="details__data-text">
-                <p>Here's for all the text from the details data</p>
+            <section class="details__info-data-text">
+                <div class="show-content">
+                    <div class="show-title">
+                        <h2> {{ showDetails?.name }} </h2>
+                    </div>
+                    <div class="show-actions">
+                        <button 
+                            v-if="isFavorite(showDetails?.id)" 
+                            @click="removeShowFromFavorites"
+                        >
+                            Remove From Favorites
+                        </button>
+                        <button @click="addShowToFavorites">
+                            Add To Favorites
+                        </button>
+                    </div>
+                </div>
+
+                <p> {{ showDetails?.description }} </p>
             </section>
         </div>
 
@@ -54,6 +71,9 @@ import Carousel from "@/components/UI/Carousel.vue"
 import CarouselItem from "@/components/UI/CarouselItem.vue"
 import TheHeader from '@/components/TheHeader.vue';
 import Loading from "@/components/UI/BaseLoading.vue";
+import { addToFavorites, removeFromFavorites, isShowAFavorite } from "@/helpers";
+import Show from '@/types/Show';
+
 
 export default defineComponent({
     name: "ShowDetails",
@@ -110,6 +130,17 @@ export default defineComponent({
             activeSlide.value = indexOfPicture;
         }
 
+        function addShowToFavorites(tvShow: Show) {
+            addToFavorites(tvShow)
+        }
+
+        function removeShowFromFavorites(tvShow: Show) {
+            removeFromFavorites(tvShow.id);
+        }
+
+        function isFavorite(showId: number | undefined): boolean {
+            return isShowAFavorite(showId)
+        }
 
         onMounted(() => {
             fetchShowDetails();
@@ -123,6 +154,9 @@ export default defineComponent({
             showNextSlide,
             showPreviousSlide,
             showThisPicture,
+            addShowToFavorites,
+            removeShowFromFavorites,
+            isFavorite,
         }
     }
 })
@@ -137,28 +171,46 @@ export default defineComponent({
         }
 
         &__info {
-            display: flex;
-            flex-flow: row wrap;
             padding: 1rem 3rem;
-            gap: 1.4rem;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            -webkit-box-align: stretch;
             width: 100%;
-            align-items: stretch;
             margin: 1.5rem auto;
             max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 2.3fr;
 
             @include respond(tab-port) {
                 padding: 1rem 0.8rem;
+                display: flex;
+                flex-flow: row wrap;
                 justify-content: center;
-                gap: 0.9rem;
+            }
+
+            &-pictures {
+
+                @include respond(tab-port) {
+                    margin-bottom: 1.5rem;
+                }
+            }
+
+            &-data-text {
+                font-family: $primary-font;
+                .show-content {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+
+                    button {
+                        @include fave-btn(0)
+                    }
+                }
             }
         }
         &__episodes {
             display: flex;
             align-content: center;
             justify-content: center;
+            margin-top: 1.5rem;
             font-family: $primary-font;
         }
     }

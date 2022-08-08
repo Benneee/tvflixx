@@ -20,7 +20,7 @@ export function fetchFavorites(): Show[] {
     return shows;
 }
 
-export function isShowAFavorite(showId: number): boolean {
+export function isShowAFavorite(showId: number | undefined): boolean {
     const shows: Show[] = fetchFavorites();
     return shows.findIndex((show: Show) => show.id === showId) !== -1;
 }
