@@ -47,6 +47,8 @@
 
         <div class="details__episodes">
             <p>Episodes will show here</p>
+
+            <Episodes :episodes="showDetails?.episodes"/>
         </div>
     </div>
             
@@ -71,6 +73,7 @@ import Carousel from "@/components/UI/Carousel.vue"
 import CarouselItem from "@/components/UI/CarouselItem.vue"
 import TheHeader from '@/components/TheHeader.vue';
 import Loading from "@/components/UI/BaseLoading.vue";
+import Episodes from "@/components/Episodes.vue";
 import { addToFavorites, removeFromFavorites, isShowAFavorite } from "@/helpers";
 import Show from '@/types/Show';
 
@@ -82,7 +85,8 @@ export default defineComponent({
         Carousel,
         CarouselItem,
         TheHeader,
-        Loading
+        Loading,
+        Episodes,
     },
 
     setup() {
