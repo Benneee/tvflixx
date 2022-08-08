@@ -8,7 +8,7 @@ interface ShowDetail {
     end_date: string | null,
     episodes: Episode[],
     genres: string[],
-    id: number,    
+    id: number | undefined, 
     image_path: string,
     image_thumbnail_path: string,
     name: string,

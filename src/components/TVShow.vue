@@ -222,7 +222,7 @@ export default defineComponent({
                 }
 
                 button {
-                    @include fave-btn;
+                    @include fave-btn(1);
                 }
             }
         }

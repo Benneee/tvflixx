@@ -20,8 +20,10 @@
   }
 }
 
-@mixin fave-btn {
-  margin-top: 1rem;
+@mixin fave-btn($needsMargin) {
+  @if $needsMargin == 1 {
+    margin-top: 1rem; 
+  }
   box-shadow: none;
   padding: 0.75rem;
   border-radius: 20px;
@@ -63,7 +65,7 @@
   }
 
   button {
-    @include fave-btn;
+    @include fave-btn(1);
   }
 }
 
