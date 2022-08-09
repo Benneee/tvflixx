@@ -35,6 +35,11 @@
   &.not-favorite {
       background-color: $red;
   }
+
+  &.active-season {
+    background-color: #000;
+    color: #fff;
+  }
 }
 
 // Order for markup is section > h1 > p > p

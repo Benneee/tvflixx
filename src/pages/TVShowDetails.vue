@@ -26,28 +26,28 @@
             <section class="details__info-data-text">
                 <div class="show-content">
                     <div class="show-title">
-                        <h2> {{ showDetails?.name }} </h2>
+                        <h1> {{ showDetails?.name }} </h1>
                     </div>
                     <div class="show-actions">
                         <button 
-                            v-if="isFavorite(showDetails?.id)" 
+                            class="not-favorite"
+                            v-if="isShowAFavorite(showDetails?.id)" 
                             @click="removeShowFromFavorites"
                         >
                             Remove From Favorites
                         </button>
-                        <button @click="addShowToFavorites">
+                        <button v-else @click="addShowToFavorites(showDetails)">
                             Add To Favorites
                         </button>
                     </div>
                 </div>
 
-                <p> {{ showDetails?.description }} </p>
+                <p v-html="showDetails?.description"></p>
             </section>
         </div>
 
         <div class="details__episodes">
-            <p>Episodes will show here</p>
-
+            <h2> {{ showDetails?.name }} Episodes </h2>
             <Episodes :episodes="showDetails?.episodes"/>
         </div>
     </div>
@@ -76,6 +76,7 @@ import Loading from "@/components/UI/BaseLoading.vue";
 import Episodes from "@/components/Episodes.vue";
 import { addToFavorites, removeFromFavorites, isShowAFavorite } from "@/helpers";
 import Show from '@/types/Show';
+import { notify } from '@kyvg/vue3-notification';
 
 
 export default defineComponent({
@@ -92,7 +93,7 @@ export default defineComponent({
     setup() {
         let isLoading = ref(false);
         let errorOccurred = ref(false);
-        let showDetails = ref<ShowDetail | null>(null);
+        let showDetails = ref<ShowDetail>();
         let activeSlide = ref(0);
         let picturesCount = ref(0);
         const route = useRoute();
@@ -134,16 +135,27 @@ export default defineComponent({
             activeSlide.value = indexOfPicture;
         }
 
-        function addShowToFavorites(tvShow: Show) {
-            addToFavorites(tvShow)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        function addShowToFavorites(tvShow: any) {
+            const { 
+                country, end_date, id, image_thumbnail_path, name, network, permalink, start_date, status 
+            } 
+            =  tvShow;
+            const showToAdd: Show = {
+                country, end_date, id, image_thumbnail_path, name, network, permalink, start_date, status
+            };
+            addToFavorites(showToAdd);
+            fetchShowDetails();
         }
 
-        function removeShowFromFavorites(tvShow: Show) {
-            removeFromFavorites(tvShow.id);
-        }
-
-        function isFavorite(showId: number | undefined): boolean {
-            return isShowAFavorite(showId)
+        function removeShowFromFavorites() {
+            const { id } = showDetails.value || {};
+            removeFromFavorites(id);
+            notify({
+                title: "Favorites",
+                text: `${showDetails.value?.name} has been removed from your favorite TV shows`
+            })
+            fetchShowDetails();
         }
 
         onMounted(() => {
@@ -160,7 +172,7 @@ export default defineComponent({
             showThisPicture,
             addShowToFavorites,
             removeShowFromFavorites,
-            isFavorite,
+            isShowAFavorite,
         }
     }
 })
@@ -175,11 +187,11 @@ export default defineComponent({
         }
 
         &__info {
-            padding: 1rem 3rem;
-            width: 100%;
-            margin: 1.5rem auto;
-            max-width: 1200px;
             display: grid;
+            width: 100%;
+            max-width: 1200px;
+            padding: 1rem 3rem;
+            margin: 1.5rem auto;
             grid-template-columns: 1fr 2.3fr;
 
             @include respond(tab-port) {
@@ -204,6 +216,19 @@ export default defineComponent({
                     align-items: center;
                     margin-bottom: 1.5rem;
 
+                    @include respond(tab-port) {
+                        flex-direction: column;
+                    }
+
+                    .show-title {
+                        font-size: 1.6rem;
+
+                        @include respond(tab-port) {
+                            margin-bottom: 0.7rem;
+                            font-size: 1.2rem;
+                        }
+                    }
+
                     button {
                         @include fave-btn(0)
                     }
@@ -211,11 +236,19 @@ export default defineComponent({
             }
         }
         &__episodes {
-            display: flex;
-            align-content: center;
-            justify-content: center;
-            margin-top: 1.5rem;
+            padding: 1rem 3rem;
+            margin: 1.5rem auto;
+            width: 100%;
+            max-width: 1200px;
             font-family: $primary-font;
+
+            @include respond(tab-port) {
+                padding: 1rem;
+            }
+
+            h2 {
+                margin-bottom: 1rem;
+            }
         }
     }
 </style>
