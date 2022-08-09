@@ -11,8 +11,20 @@ export function formatDate(date: string): string {
     return moment(date).format('Do MMMM, YYYY')
 }
 
+export function shorterFormatDate(date: string): string {
+    return moment(date).format('Do MMM, YYYY')
+}
+
 export function formatDateTime(date: string): string {
     return moment(date).format('Do, MMM YYYY, HH:mm a')
+}
+
+export function formatDateFromNow(date: string): string {
+    return moment(date).fromNow()
+}
+
+export function formatTime(date: string): string {
+    return moment(date).format('HH:mm a')
 }
 
 export function fetchFavorites(): Show[] {
@@ -53,7 +65,7 @@ export function addToFavorites(tvShow: Show): void {
     })
 }
 
-export function removeFromFavorites(showId: number): void {
+export function removeFromFavorites(showId: number | undefined): void {
     const favoriteShows: Show[] = fetchFavorites();
     if (favoriteShows.length > 0) {
         const updatedFavorites = favoriteShows.filter(show => show.id !== showId);
