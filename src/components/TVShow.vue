@@ -23,7 +23,7 @@
 
             <div class="show-actions">
                 <a class="pointer" @click="goToDetails(tvShow)"> <i class="mdi mdi-eye"></i> See details</a>
-                <button v-if="!isFavorite(tvShow.id)" @click="addShowToFavorites(tvShow)">
+                <button v-if="!isShowAFavorite(tvShow.id)" @click="addShowToFavorites(tvShow)">
                     Add as Favorite 
                     <i class="mdi mdi-heart-outline"></i>
                 </button>
@@ -83,10 +83,6 @@ export default defineComponent({
             return formatDate(date);
         }
 
-        function isFavorite(showId: number): boolean {
-            return isShowAFavorite(showId)
-        }
-
         function addShowToFavorites(tvShow: Show): void {
             addToFavorites(tvShow)
         }
@@ -116,7 +112,7 @@ export default defineComponent({
             selectedShow,
             isSelected,
             getFormattedDate,
-            isFavorite,
+            isShowAFavorite,
             addShowToFavorites,
             removeShowFromFavorites,
             goToDetails,
