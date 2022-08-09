@@ -1,7 +1,7 @@
 interface Show {
     country: string,
     end_date: string | null,
-    id: number,
+    id: number | undefined,
     image_thumbnail_path: string | null,
     name: string,
     network: string | null,
