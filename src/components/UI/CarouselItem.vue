@@ -29,11 +29,11 @@ export default defineComponent({
 
 <style scoped lang="scss">
     .slide-enter-active {
-        animation: slideIn 0.3s ease-in-out;
+        transition: slideIn 0.4s ease-in-out;
     }
 
     .slide-leave-active {
-        transition: slideOut 0.3s ease-in-out;
+        transition: slideOut 0.4s ease-in-out;
     }
 
     @keyframes slideIn {
