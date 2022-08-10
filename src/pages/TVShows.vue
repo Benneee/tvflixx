@@ -1,5 +1,7 @@
 <template>
     <div>
+        <SearchShows @searchQuery="searchShows" />
+
         <div class="tv-shows" v-if="!errorOccurred">
             <TVShowsList :tvShows="tvShows" />
             <Observer @intersect="intersected" />
@@ -35,6 +37,7 @@ import { apiURL } from "@/helpers";
 import Show from '@/types/Show';
 import ShowsListDataFromAPI from "@/types/ShowDataFromAPI";
 import Observer from "@/components/Observer.vue";
+import SearchShows from "@/components/SearchShows.vue";
 
 
 export default defineComponent({
@@ -43,6 +46,7 @@ export default defineComponent({
         Spinner,
         TVShowsList,
         Observer,
+        SearchShows,
     },
 
     setup() {
@@ -73,6 +77,11 @@ export default defineComponent({
             await fetchTVShows(currentPage.value);
         }
 
+        async function searchShows(dataToSearch: string): Promise<Show[] | []> {
+            console.log("To search: ", dataToSearch);
+            return [];
+        }
+
         onMounted(() => {
             fetchTVShows();
         })
@@ -83,6 +92,7 @@ export default defineComponent({
             intersected,
             tvShows,
             errorOccurred,
+            searchShows,
         }
     }
 })
@@ -91,7 +101,7 @@ export default defineComponent({
 <style lang="scss" scoped>
     .tv-shows {
         @include grid-flex;
-        margin-top: 6.5rem;
+        margin-top: 2rem;
 
         @include respond(phone) {
             margin-top: 4rem;
