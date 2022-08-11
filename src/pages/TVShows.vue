@@ -54,16 +54,21 @@ export default defineComponent({
         let currentPage = ref(1);
         let errorOccurred = ref(false);
         let tvShows = ref<Show[]>([])
+        let searchQuery = ref('');
+        let isSearchQuery = ref(false);
+        let totalAvailablePages = ref(1);
 
         async function fetchTVShows(pageNumber: number = currentPage.value) {
             isLoading.value = true;
             try {
                 const response = await axios.get(`${apiURL}/most-popular?page=${pageNumber}`);
                 const { data } = response;
-                const { page, tv_shows }: ShowsListDataFromAPI = data
-                currentPage.value = page; // To be used later for the observer component
+                const { pages, page, tv_shows }: ShowsListDataFromAPI = data
+                currentPage.value = page;
                 let showsGotten = tv_shows
-                tvShows.value = [ ...tvShows.value || [], ...showsGotten ];
+                totalAvailablePages.value = pages;
+                tvShows.value =  totalAvailablePages.value > 1 ? 
+                    [ ...tvShows.value || [], ...showsGotten ] : showsGotten;
 
                 isLoading.value = false;
             } catch (error) {
@@ -73,13 +78,35 @@ export default defineComponent({
         }
 
         async function intersected() {
-            currentPage.value++
-            await fetchTVShows(currentPage.value);
+            // Use a counter here to regulate the increment of currentPage
+            if (totalAvailablePages.value > 1) {
+                currentPage.value++
+                isSearchQuery.value ? 
+                await searchShows(searchQuery.value, currentPage.value) :
+                    await fetchTVShows(currentPage.value);
+            }
         }
 
-        async function searchShows(dataToSearch: string): Promise<Show[] | []> {
-            console.log("To search: ", dataToSearch);
-            return [];
+        async function searchShows(dataToSearch: string, pageNumber = 1) {
+            isLoading.value = true;
+            searchQuery.value = dataToSearch;
+            try {
+                isSearchQuery.value = true;
+                const response = await axios.get(`${apiURL}/search?q=${dataToSearch}&page=${pageNumber}`);
+                const { data } = response;
+                const { pages, page, tv_shows }: ShowsListDataFromAPI = data;
+                currentPage.value = page;
+                let showsGotten = tv_shows;
+                totalAvailablePages.value = pages;
+                // Use a counter here to regular the spread operation
+                tvShows.value =  totalAvailablePages.value > 1 ? 
+                    [ ...tvShows.value || [], ...showsGotten ] : showsGotten;
+                isLoading.value = false;
+            } catch (error) {
+                isSearchQuery.value = false;
+                isLoading.value = false;
+                errorOccurred.value = !!error;
+            }
         }
 
         onMounted(() => {

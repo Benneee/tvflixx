@@ -73,8 +73,13 @@ export default defineComponent({
         width: 50vw;
 
         border: none;
-        border-bottom: 1px solid $blue;
+        border-bottom: 1px solid rgb(71, 69, 69);
         font-family: $primary-font;
+
+        &:active, &:focus {
+            outline: rgb(71, 69, 69);
+            border: 1px solid rgb(71, 69, 69);
+        }
 
         @include respond(tab-port) {
             width: 100%;
