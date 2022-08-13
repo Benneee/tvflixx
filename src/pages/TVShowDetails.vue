@@ -136,11 +136,11 @@ export default defineComponent({
         }
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        function addShowToFavorites(tvShow: any) {
+        function addShowToFavorites(tvShow: ShowDetail | any) {
             const { 
                 country, end_date, id, image_thumbnail_path, name, network, permalink, start_date, status 
             } 
-            =  tvShow;
+            =  tvShow
             const showToAdd: Show = {
                 country, end_date, id, image_thumbnail_path, name, network, permalink, start_date, status
             };
