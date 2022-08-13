@@ -47,6 +47,7 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
 import Episode from '@/types/Episode';
+import SeasonEpisodes from '@/types/SeasonEpisodes';
 import { formatTime, formatDate, formatDateFromNow, shorterFormatDate } from "@/helpers";
 
 export default defineComponent({
@@ -72,7 +73,7 @@ export default defineComponent({
         }
         
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        function createSeasonButtons(seasonEpisodes: any) {
+        function createSeasonButtons(seasonEpisodes: SeasonEpisodes) {
             if (seasonEpisodes) {
                 showSeasons.value = Object.keys(seasonEpisodes).length;
             }
@@ -81,7 +82,7 @@ export default defineComponent({
         // Method to create the episodes
         function createEpisodes(episodes: Episode[]) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            let seasonEpisodes: any = {};
+            let seasonEpisodes: SeasonEpisodes = {};
 
             if (episodes?.length > 0) {
                 episodes.forEach((episode: Episode) => {
