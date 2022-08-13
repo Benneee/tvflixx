@@ -81,7 +81,6 @@ export default defineComponent({
 
         // Method to create the episodes
         function createEpisodes(episodes: Episode[]) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             let seasonEpisodes: SeasonEpisodes = {};
 
             if (episodes?.length > 0) {

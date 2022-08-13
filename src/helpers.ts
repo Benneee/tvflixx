@@ -1,8 +1,9 @@
 import moment from "moment";
 import { notify } from "@kyvg/vue3-notification";
+import axios from "axios";
 
 import Show from "@/types/Show";
-
+import ShowsListDataFromAPI from "@/types/ShowDataFromAPI";
 
 
 export const apiURL = "https://www.episodate.com/api";
@@ -74,5 +75,25 @@ export function removeFromFavorites(showId: number | undefined): void {
             "tvShows",
             JSON.stringify(updatedFavorites)
         )
+    }
+}
+
+// Explore later!
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const fetchShowsData = async(url: string): Promise<ShowsListDataFromAPI | boolean> => {
+    try {
+        const response = await axios.get(url);
+        const { data } = response;
+        const { total, pages, page, tv_shows }: ShowsListDataFromAPI = data;
+        return {
+            page,
+            pages,
+            total,
+            tv_shows
+        }
+    } catch (error) {
+        // isSearchQuery.value = false;
+        // isLoading.value = false;
+        return !!error
     }
 }

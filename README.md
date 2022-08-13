@@ -1,24 +1,26 @@
-# tvflixx
+# TVFlixx
 
-## Project setup
-```
-npm install
-```
+## Project Background
+Before now, I've done a few movie-type of web-apps, (simple) applications showing a list of movies from an API and their details.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+[Moflixx](https://github.com/Benneee/moflixx) comes to mind.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+I'm currently (trying to) work(ing) more with TypeScript and Vue 3 (Composition API), I felt a better way to do stuff with TV shows would be "TVFlixx.
 
-### Lints and fixes files
-```
-npm run lint
-```
+I'm a huge TV shows fan so this was interesting to me at first glance, without thinking too much about the effort required.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+I found an API that really works and started drawing plans and doing ToDos off the plans I had drawn.
+
+## Thought Process
+
+
+Like [Moflixx](), I needed an API for the TV shows and their details, that's where [Episodate](https://www.episodate.com/) comes in.
+
+Next, I needed to draw up a structure for the application, I needed a few pages, components and probably widgets:
+
+I always like a "favorites" feature in applications like this, so I couldn't resist the temptation.
+
+*Sidenote: I should probably create something off my obsession for favorites feature*
+
+
+I wrote more about my thought process for TVFlixx [here]()
