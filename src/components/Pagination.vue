@@ -108,7 +108,6 @@ export default defineComponent ({
 
         const pages = computed(() => {
             const range = [];
-            console.log("startPage: ", startPage.value);
             for (
                 let i = startPage.value;
                 i <= Math.min(startPage.value + props.maxVisiblePages - 1, props.totalPages);
