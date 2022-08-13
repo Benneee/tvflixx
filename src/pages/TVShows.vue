@@ -1,10 +1,11 @@
 <template>
     <div>
-        <SearchShows @searchQuery="searchShows" />
+        <SearchShows @searchQuery="searchShows" v-if="!isLoading" ref="top"/>
 
-        <div class="tv-shows" v-if="!errorOccurred">
+        <Loading v-if="isLoading" />
+
+        <div class="tv-shows" v-if="!isLoading && !errorOccurred">
             <TVShowsList :tvShows="tvShows" />
-            <Observer @intersect="intersected" />
         </div>
 
 
@@ -24,67 +25,74 @@
             </section>
         </div>
     </div>
-    <Spinner v-if="isLoading" />
+    <div v-if="!isLoading && totalAvailablePages > 1 && !errorOccurred" class="pagination-container">
+        <Pagination
+            :totalPages="totalAvailablePages"
+            :total="totalShowsCount"
+            :perPage="20"
+            :currentPage="currentPage"
+            @page-changed="onPageChanged"
+        />
+    </div>
 </template>
 
 <script lang="ts">
 import axios from "axios";
 
-import { defineComponent, onMounted, ref } from 'vue'
-import Spinner from "@/components/UI/BaseSpinner.vue";
+import { defineComponent, nextTick, onMounted, ref } from 'vue'
+import Loading from "@/components/UI/BaseLoading.vue";
 import TVShowsList from "@/components/TVShowsList.vue";
 import { apiURL } from "@/helpers";
 import Show from '@/types/Show';
 import ShowsListDataFromAPI from "@/types/ShowDataFromAPI";
-import Observer from "@/components/Observer.vue";
 import SearchShows from "@/components/SearchShows.vue";
+import Pagination from "@/components/Pagination.vue";
 
 
 export default defineComponent({
     name: 'TVShows',
     components: {
-        Spinner,
+        Loading,
         TVShowsList,
-        Observer,
         SearchShows,
+        Pagination,
     },
 
     setup() {
         let isLoading = ref(false);
-        let currentPage = ref(1);
         let errorOccurred = ref(false);
         let tvShows = ref<Show[]>([])
         let searchQuery = ref('');
         let isSearchQuery = ref(false);
+        const top = ref<HTMLDivElement>()
+
+        // Pagination stuff
         let totalAvailablePages = ref(1);
+        let totalShowsCount = ref(0);
+        let currentPage = ref(1);
 
         async function fetchTVShows(pageNumber: number = currentPage.value) {
             isLoading.value = true;
             try {
                 const response = await axios.get(`${apiURL}/most-popular?page=${pageNumber}`);
                 const { data } = response;
-                const { pages, page, tv_shows }: ShowsListDataFromAPI = data
+                const { total, pages, page, tv_shows }: ShowsListDataFromAPI = data
                 currentPage.value = page;
-                let showsGotten = tv_shows
                 totalAvailablePages.value = pages;
-                tvShows.value =  totalAvailablePages.value > 1 ? 
-                    [ ...tvShows.value || [], ...showsGotten ] : showsGotten;
-
+                totalShowsCount.value = Number(total);
+                tvShows.value =  tv_shows;
                 isLoading.value = false;
+                nextTick(() => top.value?.scrollTo({ behavior: 'smooth', top: 0 }));
             } catch (error) {
                 isLoading.value = false;
                 errorOccurred.value = !!error;
             }
         }
 
-        async function intersected() {
-            // Use a counter here to regulate the increment of currentPage
-            if (totalAvailablePages.value > 1) {
-                currentPage.value++
-                isSearchQuery.value ? 
-                await searchShows(searchQuery.value, currentPage.value) :
-                    await fetchTVShows(currentPage.value);
-            }
+        async function onPageChanged(page: number) {
+            isSearchQuery.value ? 
+                await searchShows(searchQuery.value, page) :
+                    await fetchTVShows(page);
         }
 
         async function searchShows(dataToSearch: string, pageNumber = 1) {
@@ -94,14 +102,13 @@ export default defineComponent({
                 isSearchQuery.value = true;
                 const response = await axios.get(`${apiURL}/search?q=${dataToSearch}&page=${pageNumber}`);
                 const { data } = response;
-                const { pages, page, tv_shows }: ShowsListDataFromAPI = data;
+                const { total, pages, page, tv_shows }: ShowsListDataFromAPI = data;
                 currentPage.value = page;
-                let showsGotten = tv_shows;
                 totalAvailablePages.value = pages;
-                // Use a counter here to regular the spread operation
-                tvShows.value =  totalAvailablePages.value > 1 ? 
-                    [ ...tvShows.value || [], ...showsGotten ] : showsGotten;
+                totalShowsCount.value = Number(total);
+                tvShows.value =  tv_shows;
                 isLoading.value = false;
+                nextTick(() => top.value?.scrollTo({ behavior: 'smooth', top: 0 }));
             } catch (error) {
                 isSearchQuery.value = false;
                 isLoading.value = false;
@@ -111,15 +118,17 @@ export default defineComponent({
 
         onMounted(() => {
             fetchTVShows();
-        })
+        });
 
         return {
             isLoading,
             currentPage,
-            intersected,
             tvShows,
             errorOccurred,
             searchShows,
+            totalAvailablePages,
+            totalShowsCount,
+            onPageChanged,
         }
     }
 })
@@ -137,5 +146,10 @@ export default defineComponent({
 
     .tv-error {
         @include info-block;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
     }
 </style>
