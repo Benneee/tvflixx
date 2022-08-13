@@ -14,7 +14,7 @@ I found an API that really works and started drawing plans and doing ToDos off t
 ## Thought Process
 
 
-Like [Moflixx](), I needed an API for the TV shows and their details, that's where [Episodate](https://www.episodate.com/) came to the rescue.
+Like [Moflixx](), I needed an API for the TV shows and their details, that's where [Episodate](https://www.episodate.com/) comes in.
 
 Next, I needed to draw up a structure for the application, I needed a few pages, components and probably widgets:
 
