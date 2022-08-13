@@ -1,7 +1,6 @@
 # tvflixx
 
 ## Project Background
-```
 Before now, I've done a few movie-type of web-apps, (simple) applications showing a list of movies from an API and their details.
 
 [Moflixx](https://github.com/Benneee/moflixx) comes to mind.
@@ -11,7 +10,6 @@ I'm currently (trying to) work(ing) more with TypeScript and Vue 3 (Composition 
 I'm a huge TV shows fan so this was interesting to me at first glance, without thinking too much about the effort required.
 
 I found an API that really works and started drawing plans and doing ToDos off the plans I had drawn.
-```
 
 ## Thought Process
 
