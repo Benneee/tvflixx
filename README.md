@@ -25,6 +25,6 @@ I always like a "favorites" feature in applications like this, so I couldn't res
 
 I wrote more about my thought process for TVFlixx [here]()
 
-[Homepage](./src/assets/images/Screenshot%202022-08-13%20at%2010.49.47-min.png)
+![Homepage](./src/assets/images/Screenshot%202022-08-13%20at%2010.49.47-min.png)
 
-[Show Details Page](./src/assets/images/Screenshot%202022-08-13%20at%2010.50.03-min.png)
+![Show Details Page](./src/assets/images/Screenshot%202022-08-13%20at%2010.50.03-min.png)
