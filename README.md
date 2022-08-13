@@ -1,4 +1,4 @@
-# tvflixx
+# TVFlixx
 
 ## Project Background
 Before now, I've done a few movie-type of web-apps, (simple) applications showing a list of movies from an API and their details.
