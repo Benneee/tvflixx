@@ -19,7 +19,8 @@ Like [Moflixx](), I needed an API for the TV shows and their details, that's whe
 Next, I needed to draw up a structure for the application, I needed a few pages, components and probably widgets:
 
 I always like a "favorites" feature in applications like this, so I couldn't resist the temptation.
-*Sidenote to create something off my obsession for feavorites feature*
+
+*Sidenote: I should probably create something off my obsession for favorites feature*
 
 
 I wrote more about my thought process for TVFlixx [here]()
