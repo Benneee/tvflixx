@@ -19,6 +19,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../pages/Favorites.vue')
     },
     {
+        path: '/lang',
+        name: 'language',
+        component: () => import('../pages/Lang.vue')
+    },
+    {
         path: '/shows/:showId',
         name: 'show-details',
         component: () => import('../pages/TVShowDetails.vue'),
