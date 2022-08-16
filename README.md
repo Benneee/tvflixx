@@ -23,7 +23,7 @@ I always like a "favorites" feature in applications like this, so I couldn't res
 *Sidenote: I should probably create something off my obsession for favorites feature*
 
 
-I wrote more about my thought process for TVFlixx [here]()
+I wrote more about my thought process for TVFlixx [here](https://dev.to/benneee_/building-tvflixx-15oo)
 
 ![Homepage](./src/assets/images/Screenshot%202022-08-13%20at%2010.49.47-min.png)
 
